@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { UserSc, ValCreateUser, ValLoginUser } = require("../models/UserSchema");
 const asyncHandler = require("express-async-handler");
 const jwi = require("jsonwebtoken");
