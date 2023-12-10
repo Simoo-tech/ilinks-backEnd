@@ -7,10 +7,6 @@ const {
 
 const router = express.Router();
 
-router
-  .route("/userprofile/:id")
-  .get(getUserById)
-  .put(updateUserData)
-  .delete(deleteUser);
+router.route("/:id").get(getUserById).put(updateUserData).delete(deleteUser);
 
 module.exports = router;
