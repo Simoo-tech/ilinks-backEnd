@@ -51,9 +51,9 @@ const formData = new mongoose.Schema(
     ],
     portfolio: [
       {
-        imgformat: { type: String, contentType: String },
-        imgname: { type: String, default: "null" },
-        imgurl: { type: String, default: "null" },
+        imgformat: { type: String,},
+        imgname: { type: String,  },
+        imgurl: { type: String },
         porname: { type: String, default: "null" },
         prodesc: { type: String, default: "null" },
         porurl: { type: String, default: "null" },
