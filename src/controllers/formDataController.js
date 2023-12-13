@@ -76,7 +76,7 @@ const deleteFormData = asyncHandler(async (req, res) => {
 const getformuserId = asyncHandler(async (req, res) => {
   const formDataID = await FormDataSc.findById(req.body.formDataID);
   const user = await UserSc.findById(req.body.userID);
-  user.formData = formDataId;
+  user.formData = formDataID;
   await user.save();
   res.json({ formData: user.formData });
 });
