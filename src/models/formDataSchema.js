@@ -16,30 +16,32 @@ const formData = new mongoose.Schema(
     },
     imgname: { type: String },
     imgurl: { type: String },
+
     facebookUrl: {
       type: String,
     },
-    GithubUrl: {
+    githubUrl: {
       type: String,
     },
-    TwitterUrl: {
+    twitterUrl: {
       type: String,
     },
-    InstagramUrl: {
+    instagramUrl: {
       type: String,
     },
-    TelegramUrl: {
+    telegramUrl: {
       type: String,
     },
-    WhatsappUrl: {
+    whatsappUrl: {
       type: Number,
     },
-    YoutubeUrl: {
+    youtubeUrl: {
       type: String,
     },
-    LinkedinUrl: {
+    linkedinUrl: {
       type: String,
     },
+
     morelinks: [
       {
         iconlink: { type: String, default: "null" },
@@ -49,7 +51,9 @@ const formData = new mongoose.Schema(
     ],
     portfolio: [
       {
-        img: { type: String, default: "null" },
+        imgformat: { type: String, contentType: String },
+        imgname: { type: String, default: "null" },
+        imgurl: { type: String, default: "null" },
         porname: { type: String, default: "null" },
         prodesc: { type: String, default: "null" },
         porurl: { type: String, default: "null" },
@@ -61,6 +65,12 @@ const formData = new mongoose.Schema(
         skillperc: { type: String, default: "null" },
       },
     ],
+    rate: {
+      bad: { type: Boolean, default: false },
+      middle: { type: Boolean, default: false },
+      good: { type: Boolean, default: false },
+    },
+    message: { type: String },
   },
   { timestamps: true }
 );
