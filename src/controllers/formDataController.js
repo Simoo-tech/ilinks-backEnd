@@ -74,11 +74,11 @@ const deleteFormData = asyncHandler(async (req, res) => {
 
 // get user and form data id
 const getformuserId = asyncHandler(async (req, res) => {
-  const formID = await FormDataSc.findById(req.body.formID);
+  const formDataID = await FormDataSc.findById(req.body.formDataID);
   const user = await UserSc.findById(req.body.userID);
-  user.formID = formID;
+  user.formData = formDataId;
   await user.save();
-  res.json({ formID: user.formID });
+  res.json({ formData: user.formData });
 });
 
 module.exports = {

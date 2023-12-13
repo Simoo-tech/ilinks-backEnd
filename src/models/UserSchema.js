@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     lname: { type: String, maxLenght: 30, trim: true },
     verifed: { type: Boolean, default: false },
     code: { type: Number, length: 6 },
-    formID: {
+    formData: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "formData",
     },
@@ -98,7 +98,7 @@ function ValLoginUser(obj) {
   const schema = joi.object({
     email: joi.string().trim().required(),
     password: joi.string().trim().min(8).max(16).required(),
-    formID: joi.string().trim(),
+    formData: joi.string().trim(),
   });
   return schema.validate(obj);
 }
