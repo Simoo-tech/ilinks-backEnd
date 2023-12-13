@@ -1,6 +1,5 @@
 const { UserSc, ValUpdateUser } = require("../models/UserSchema");
 const asyncHandler = require("express-async-handler");
-const { FormDataSc } = require("../models/formDataSchema");
 /**
  * @desc get user by id
  * @route /user/:id

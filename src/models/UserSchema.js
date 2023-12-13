@@ -98,7 +98,7 @@ function ValLoginUser(obj) {
   const schema = joi.object({
     email: joi.string().trim().required(),
     password: joi.string().trim().min(8).max(16).required(),
-    formData: joi.string().trim(),
+    formID: joi.string().trim(),
   });
   return schema.validate(obj);
 }
