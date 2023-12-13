@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     lname: { type: String, maxLenght: 30, trim: true },
     verifed: { type: Boolean, default: false },
     code: { type: Number, length: 6 },
-    formData: {
+    formID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "formData",
     },
