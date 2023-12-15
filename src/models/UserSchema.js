@@ -102,7 +102,29 @@ function ValLoginUser(obj) {
   });
   return schema.validate(obj);
 }
-
+function ValidateResetPassword(obj) {
+  const schema = joi.object({
+    password: joi
+      .string()
+      .trim()
+      .min(8)
+      .max(16)
+      .required()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d[\]{};:=<>_+^#$@!%*?&]{8,30}$/
+      )
+      .messages({
+        "string.min": `password must be at least 8 char`,
+        "any.required": " is a required field",
+        "object.regex": "invalid password",
+        "string.pattern.base": "invalid password",
+      }),
+    passwordcon: joi.string().required().valid(joi.ref("password")).messages({
+      "any.only": "Password not match",
+    }),
+  });
+  return schema.validate(obj);
+}
 function ValUpdateUser(obj) {
   const schema = joi.object({
     username: joi
@@ -135,4 +157,10 @@ function ValUpdateUser(obj) {
   return schema.validate(obj);
 }
 
-module.exports = { UserSc, ValCreateUser, ValLoginUser, ValUpdateUser };
+module.exports = {
+  UserSc,
+  ValCreateUser,
+  ValLoginUser,
+  ValUpdateUser,
+  ValidateResetPassword,
+};
