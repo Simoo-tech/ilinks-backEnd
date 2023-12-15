@@ -26,16 +26,20 @@ const register = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: error.details[0].message });
   }
   // check email
-  let newUser = await UserSc.findOne({ email });
-  if (newUser) {
-    return res.status(400).json({ message: "Email already registered" });
-  }
-  const newCode = Math.floor(Math.random() * 900000) + 100000;
+  let newUserEmail = await UserSc.findOne({ email });
+  let newUserUserName = await UserSc.findOne({ username });
 
+  if (newUserEmail) {
+    return res.status(400).json({ message: "Email already registered" });
+  } else if (newUserUserName) {
+    return res.status(400).json({ message: "username already choosen" });
+  }
+  // new code generator
+  const newCode = Math.floor(Math.random() * 900000) + 100000;
   // hash password
   const hashPassword = await bcrypt.hash(password, 10);
   const hashPasswordCon = await bcrypt.hash(passwordcon, 10);
-  newUser = new UserSc({
+  const newUser = new UserSc({
     username,
     email,
     password: hashPassword,

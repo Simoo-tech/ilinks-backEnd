@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const joi = require("joi");
 const formData = new mongoose.Schema(
   {
     userID: {
@@ -16,7 +15,6 @@ const formData = new mongoose.Schema(
     },
     imgname: { type: String },
     imgurl: { type: String },
-
     facebookUrl: {
       type: String,
     },
@@ -29,9 +27,6 @@ const formData = new mongoose.Schema(
     instagramUrl: {
       type: String,
     },
-    telegramUrl: {
-      type: String,
-    },
     whatsappUrl: {
       type: Number,
     },
@@ -41,7 +36,7 @@ const formData = new mongoose.Schema(
     linkedinUrl: {
       type: String,
     },
-
+    tiktokUrl: { type: String },
     morelinks: [
       {
         iconlink: { type: String, default: "null" },
@@ -51,8 +46,8 @@ const formData = new mongoose.Schema(
     ],
     portfolio: [
       {
-        imgformat: { type: String,},
-        imgname: { type: String,  },
+        imgformat: { type: String },
+        imgname: { type: String },
         imgurl: { type: String },
         porname: { type: String, default: "null" },
         prodesc: { type: String, default: "null" },
