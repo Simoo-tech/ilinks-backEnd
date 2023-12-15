@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 router.post("/createData", createFormData);
-router.put("/updateData/:id", updateFormData);
+router.put("/updateData", updateFormData);
 router.put("/", getformuserId);
 router.get("/:id", getFormDatabyId);
 router.delete("/:id", deleteFormData);

@@ -47,11 +47,11 @@ const getFormDatabyId = asyncHandler(async (req, res) => {
  */
 const updateFormData = asyncHandler(async (req, res) => {
   const formData = await FormDataSc.findByIdAndUpdate(
-    req.params.id,
+    req.body.formID,
+    req.body,
     {
-      $set: {},
-    },
-    { new: true, runValidators: true }
+      new: true,
+    }
   );
 
   res.status(200).json({ message: "data updated", formData });
