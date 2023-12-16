@@ -125,31 +125,6 @@ function ValUpdateUser(obj) {
       .trim()
       .regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
       .message("email not valid"),
-    password: joi
-      .string()
-      .trim()
-      .min(8)
-      .max(16)
-      .required()
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d[\]{};:=<>_+^#$@!%*?&]{8,30}$/
-      )
-      .messages({
-        "string.min": `password must be at least 8 char`,
-        "any.required": " is a required field",
-        "object.regex": "invalid password",
-        "string.pattern.base": "invalid password",
-      }),
-    passwordcon: joi.string().required().valid(joi.ref("password")).messages({
-      "any.only": "Password not match",
-    }),
-    avatar: joi.string().optional(),
-    fname: joi.string().max(30).allow("").trim(),
-    lname: joi.string().max(30).allow("").trim(),
-    verifed: joi.bool().default(false),
-    age: joi.number().integer(),
-    state: joi.string().trim(),
-    country: joi.string().trim(),
   });
   return schema.validate(obj);
 }
