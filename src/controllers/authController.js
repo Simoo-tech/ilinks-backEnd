@@ -91,9 +91,7 @@ const login = asyncHandler(async (req, res) => {
   // check email is exist
   let user = await UserSc.findOne({ email });
   if (!user) {
-    return res
-      .status(400)
-      .json({ message: "Email not existed register first" });
+    return res.status(400).json({ message: " Email not exist register first" });
   }
   passwordCheck = await bcrypt.compare(password, user.password);
   if (!passwordCheck) {

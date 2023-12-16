@@ -62,10 +62,9 @@ function ValCreateUser(obj) {
       .required()
       .regex(/^[a-zA-Z0-9\_-]{3,15}$/)
       .messages({
-        "string.min": `username must be 3 characters with symbol (-,_)`,
-        "any.required": " is a required field",
+        "string.min": `username must be at least 3 char`,
         "string.pattern.base":
-          "name must be at least 3 characters without spaces",
+          "username must be without spaces you can use (-,_)",
       }),
     email: joi
       .string()
@@ -107,8 +106,25 @@ function ValLoginUser(obj) {
   });
   return schema.validate(obj);
 }
-function ValidateResetPassword(obj) {
+function ValUpdateUser(obj) {
   const schema = joi.object({
+    username: joi
+      .string()
+      .trim()
+      .min(3)
+      .max(15)
+      .regex(/^[a-zA-Z0-9\_-]{3,15}$/)
+      .messages({
+        "string.min": `username must be at least 3 char`,
+        "string.pattern.base":
+          "username must be without spaces you can use (-,_)",
+      })
+      .required(),
+    email: joi
+      .string()
+      .trim()
+      .regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+      .message("email not valid"),
     password: joi
       .string()
       .trim()
@@ -127,30 +143,6 @@ function ValidateResetPassword(obj) {
     passwordcon: joi.string().required().valid(joi.ref("password")).messages({
       "any.only": "Password not match",
     }),
-  });
-  return schema.validate(obj);
-}
-function ValUpdateUser(obj) {
-  const schema = joi.object({
-    username: joi
-      .string()
-      .trim()
-      .min(3)
-      .max(15)
-      .regex(/^[a-zA-Z0-9\_-]{3,15}$/)
-      .messages({
-        "string.min": `username must be 3 characters with symbol (-,_)`,
-        "string.pattern.base":
-          "username must be without spaces you can use (-,_)",
-      })
-      .required(),
-    email: joi
-      .string()
-      .trim()
-      .regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-      .message("email not valid"),
-    password: joi.string().trim().min(8).max(16),
-    passwordcon: joi.string().valid(joi.ref("password")),
     avatar: joi.string().optional(),
     fname: joi.string().max(30).allow("").trim(),
     lname: joi.string().max(30).allow("").trim(),
@@ -167,5 +159,4 @@ module.exports = {
   ValCreateUser,
   ValLoginUser,
   ValUpdateUser,
-  ValidateResetPassword,
 };
