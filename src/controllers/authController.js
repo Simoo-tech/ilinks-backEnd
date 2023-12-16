@@ -108,14 +108,11 @@ const login = asyncHandler(async (req, res) => {
  * @access public
  */
 const resetPassword = asyncHandler(async (req, res) => {
-  const { email, password, passwordcon } = req.body;
-  const user = await UserSc.findById(req.params.id).select("email username");
-  const userCheck = await UserSc.findOne({ email }).select("email");
-  if (!userCheck) {
-    res.status(404).json({ message: "email not valid" });
-  }
-  if (user.email !== userCheck.email) {
-    res.status(404).json({ message: "email not valid" });
+  const { email } = req.body;
+  const user = await UserSc.findOne({ email }).select("email username");
+
+  if (!user) {
+    res.status(404).json({ message: "we cannot find your email" });
   }
 
   const newID = uuidv4();
@@ -134,14 +131,18 @@ const resetPassword = asyncHandler(async (req, res) => {
     </head>
     <body>
       <div style="background-color: #eee; padding:5px 10px; height: 300px;">
-        <h1 style="text-align: center; color:black ;">Hello, ${user.username} </h1>
-        <h2 style="color:black ;">you recently requested to a new password </h2>
-        <h3 style="line-height: 1.2; color:black ;">Please click link below to complete your new password request,<br />
-          if you don't want to reset your password you can forget this message:<br /> <a
-            href="https://ilinks-api.onrender.com/resetpassword/${newID}" style="font-size: 17px;"> https://ilinks-api.onrender.com/resetpassword/${newID}</a>
-        </h3>
-        <h3 style="color:black ;">Thanks,<br />
-          Ilinks</h3>
+        <h2 style="text-align: center; color:black ;">Hello, ${user.username} </h2>
+        <h3 style="color:black ;">you recently requested to a new password </h3>
+        <h4 style="line-height: 1.2; color:black ;">Please click link below to complete your new password request,
+        <br/>
+        <a
+        href="https://ilinks-api.onrender.com/resetpassword/${newID}" style="font-size: 14px;"> https://ilinks-api.onrender.com/resetpassword/${newID}</a>
+        <br />
+        <br />
+          if you don't want to reset your password you can forget this message:<br />
+        </h4>
+        <h4 style="color:black ;">Thanks,<br />
+          Ilinks</h4>
       </div>
     </body>  
     </html>
@@ -150,13 +151,11 @@ const resetPassword = asyncHandler(async (req, res) => {
   // sent email
   await transporter.sendMail(mailOptions, async (err) => {
     if (err) {
-      return res.status(404).json({ message: err, newID, user, userCheck });
+      return res.status(404).json({ message: err });
     } else {
       return res.status(201).json({
         message: "email has sent",
         newID,
-        user,
-        userCheck,
       });
     }
   });

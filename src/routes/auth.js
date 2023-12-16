@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/resetpassword/:id", resetPassword);
+router.post("/resetpassword", resetPassword);
 
 module.exports = router;
