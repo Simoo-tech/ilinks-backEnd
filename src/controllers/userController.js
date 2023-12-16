@@ -43,6 +43,8 @@ const updateUserData = asyncHandler(async (req, res) => {
         verifed: req.body.verifed,
         state: req.body.state,
         country: req.body.country,
+        password: req.body.password,
+        passwordcon: req.body.passwordcon,
       },
     },
     { new: true, runValidators: true }

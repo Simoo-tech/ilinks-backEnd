@@ -96,8 +96,13 @@ function ValCreateUser(obj) {
 }
 function ValLoginUser(obj) {
   const schema = joi.object({
-    email: joi.string().trim().required(),
-    password: joi.string().trim().min(8).max(16).required(),
+    email: joi.string().trim().required().message("email not valid"),
+    password: joi.string().trim().min(8).max(16).required().messages({
+      "string.min": `password must be at least 8 char`,
+      "any.required": " is a required field",
+      "object.regex": "invalid password",
+      "string.pattern.base": "invalid password",
+    }),
     formData: joi.string().trim(),
   });
   return schema.validate(obj);
