@@ -125,6 +125,13 @@ function ValUpdateUser(obj) {
       .trim()
       .regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
       .message("email not valid"),
+    avatar: joi.string().optional(),
+    fname: joi.string().max(30).allow("").trim(),
+    lname: joi.string().max(30).allow("").trim(),
+    verifed: joi.bool().default(false),
+    age: joi.number().integer(),
+    state: joi.string().trim(),
+    country: joi.string().trim(),
   });
   return schema.validate(obj);
 }
