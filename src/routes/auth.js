@@ -8,7 +8,6 @@ const {
 const router = express.Router();
 
 router.post("/register", register);
-
 router.post("/login", login);
 router.post("/resetpassword/:id", resetPassword);
 
