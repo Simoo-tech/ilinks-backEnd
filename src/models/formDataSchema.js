@@ -49,15 +49,17 @@ const formData = new mongoose.Schema(
         imgformat: { type: String },
         imgname: { type: String },
         imgurl: { type: String },
-        porname: { type: String, default: "null" },
-        prodesc: { type: String, default: "null" },
-        porurl: { type: String, default: "null" },
+        porname: { type: String },
+        prodesc: { type: String },
+        porurl: { type: String },
+        proclient: { type: String },
+        prodate: { type: String },
       },
     ],
     skills: [
       {
-        skillname: { type: String, default: "null" },
-        skillperc: { type: String, default: "null" },
+        skillname: { type: String },
+        skillperc: { type: String },
       },
     ],
     rate: {
